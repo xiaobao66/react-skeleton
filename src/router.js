@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { hot } from 'react-hot-loader/root';
 import dynamic from 'store/dynamic';
 import store from 'store/store';
 import 'themes/default.less';
@@ -63,4 +62,4 @@ const Routers = () => {
   );
 };
 
-export default hot(Routers);
+export default Routers;

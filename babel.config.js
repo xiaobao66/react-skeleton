@@ -26,7 +26,7 @@ module.exports = api => {
       '@babel/plugin-syntax-dynamic-import',
       '@babel/plugin-proposal-class-properties',
       ['import', { libraryName: 'antd' }],
-      'react-hot-loader/babel',
+      'react-refresh/babel',
     ],
   };
 

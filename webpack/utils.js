@@ -32,7 +32,7 @@ exports.getPort = () => {
 // 获取entry
 exports.getEntry = () => {
   const entry = {
-    app: ['react-hot-loader/patch', './src/index.js'],
+    app: ['./src/index.js'],
   };
 
   return Promise.resolve(entry);

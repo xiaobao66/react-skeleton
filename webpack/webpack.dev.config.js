@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 const apiMocker = require('mocker-api');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const { getEntry, getPort } = require('./utils');
 
 module.exports = env => {
@@ -51,6 +52,7 @@ module.exports = env => {
               }),
             ]
           : []),
+        new ReactRefreshWebpackPlugin(),
       ],
 
       devServer: {
@@ -60,7 +62,9 @@ module.exports = env => {
         overlay: true,
         contentBase: path.resolve(__dirname, '../src'),
         before(app) {
-          apiMocker(app, path.resolve(__dirname, '../mock/index.js'));
+          if (env.mocker) {
+            apiMocker(app, path.resolve(__dirname, '../mock/index.js'));
+          }
         },
       },
     };
