@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useImported } from 'react-imported-component';
+import loadable from '@loadable/component';
 
 function Loading() {
   const [loading, setLoading] = useState(false);
@@ -18,27 +18,17 @@ function Loading() {
 }
 
 export default function({ store, component, models: m = () => [] }) {
-  const loader = () => {
-    return Promise.all([component(), ...m()]).then(([c, ...models]) => {
-      if (models.length > 0) {
+  return loadable(
+    () =>
+      Promise.all(m()).then(models => {
         models.forEach(model => {
           store.injectModel(model.default.namespace, model.default);
         });
-      }
 
-      return c;
-    });
-  };
-
-  function DynamicWrapper({ ...props }) {
-    const { imported: Component, loading } = useImported(loader);
-
-    if (loading) {
-      return <Loading />;
-    }
-
-    return <Component {...props} />;
-  }
-
-  return DynamicWrapper;
+        return component();
+      }),
+    {
+      fallback: <Loading />,
+    },
+  );
 }

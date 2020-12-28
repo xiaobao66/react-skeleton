@@ -43,7 +43,6 @@ module.exports = env => {
         themes: path.join(SRC_DIR, 'themes'),
         store: path.join(SRC_DIR, 'store'),
         utils: path.join(SRC_DIR, 'utils'),
-        'react-dom': '@hot-loader/react-dom',
       },
     },
 
