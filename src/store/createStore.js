@@ -27,7 +27,7 @@ export default function(initialState) {
   const store = createStore(
     combine(),
     initialState,
-    applyMiddleware(createEffectMiddleware(_models), thunk),
+    applyMiddleware(createEffectMiddleware(_models)),
   );
 
   store.injectModel = (name, m) => {
