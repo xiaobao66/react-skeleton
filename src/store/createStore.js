@@ -38,7 +38,13 @@ export default function(initialState) {
     }
 
     _models[model.namespace] = model;
-    _asyncReducers[model.namespace] = createReducer(m);
+    _asyncReducers[model.namespace] = createReducer({
+      ...m,
+      state: {
+        ...m.state,
+        ...initialState[m.namespace],
+      },
+    });
 
     store.replaceReducer(combine());
   };
